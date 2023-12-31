@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/shared/Navigation/Navigation";
-import CurrentUserProvider from "@/contextx/currentUserContext";
+import CurrentUserProvider from "@/contexts/CurrentUserContext";
 import getCurrentUser from "@/getCurrentUser";
-import CreateChannelModalProvider from "@/contextx/createChannelContext";
+import CurrentChannelProvider from "@/contexts/CurrentChannelContext";
+import CreateChannelModalProvider from "@/contexts/CreateChannelContext";
 import CreateChannelModal from "@/components/shared/Modals/CreateChannelModal";
-
+import { Toaster } from "react-hot-toast";
+import getCurrentChannel from "@/getCurrentChannel";
+import UploadVideoModalProvider from "@/contexts/UploadVideoModalContext";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -23,15 +26,24 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
-
+  const currentChannel = await getCurrentChannel();
   return (
     <html lang="en">
       <body className={inter.className}>
         <CreateChannelModalProvider>
+          <Toaster
+            toastOptions={{
+              position: "bottom-left",
+            }}
+          />
           <CurrentUserProvider user={currentUser}>
             <CreateChannelModal />
-            <Navigation />
-            <div className="pt-16">{children}</div>
+            <CurrentChannelProvider user={currentChannel}>
+              <UploadVideoModalProvider>
+                <Navigation />
+                <div className="pt-16">{children}</div>
+              </UploadVideoModalProvider>
+            </CurrentChannelProvider>
           </CurrentUserProvider>
         </CreateChannelModalProvider>
       </body>

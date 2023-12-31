@@ -1,13 +1,19 @@
 "use client";
+
 import React, { useState } from "react";
 import UserAvatar, { UserAvatarSize } from "../UserAvatar";
 import Button from "../Button";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Input from "../Input";
-
+import MediaUpload from "../MediaUpload";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { CreateChannelModalContext } from "@/contexts/CreateChannelContext";
+import { useContext } from "react";
 const CreateChannelModal = () => {
-  const [isLoading, setIsLoading] = useState();
-
+  const [isLoading, setIsLoading] = useState(false);
+  const createChannelModal = useContext(CreateChannelModalContext);
   const {
     register,
     handleSubmit,
@@ -21,14 +27,40 @@ const CreateChannelModal = () => {
       imageSrc: "",
     },
   });
-  return (
+
+  const imageSrc = watch("imageSrc");
+
+  const handleImageUpload = (value: string) => {
+    setValue("imageSrc", value, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
+
+  const onSubmit:SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
+    axios.post("/api/channels",data).then(() => {
+      toast.success("Channel created successfully");
+      createChannelModal?.onClose();
+      useRouter().refresh();
+
+    }).catch(() => {
+      toast.error("Could not create channel")
+    }).finally(() => setIsLoading(false));
+    
+  }
+
+  return createChannelModal?.isOpen ? (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-zinc-800 w-3/5 max-w-sxl rounded-xl justify-center z-50">
       <h1 className="text-xl p-3 border-b border-neutral-700">
         How you&apos;ll appear
       </h1>
       <div className="flex flex-col items-center py-3 gap-4">
-        <UserAvatar size={UserAvatarSize.lg} imageSrc={null} />
-        <Button type={"primary"}>Upload Picture</Button>
+        <UserAvatar size={UserAvatarSize.lg} imageSrc={imageSrc} />
+        <MediaUpload onChange={handleImageUpload}>
+          <Button type={"primary"}>Upload Picture</Button>
+        </MediaUpload>
         <Input
           id="name"
           label="name"
@@ -58,11 +90,11 @@ const CreateChannelModal = () => {
         />
       </div>
       <div className="p-3 border-t border-neutral-700 flex justify-end gap-3">
-        <Button type="secondary">Cancel</Button>
-        <Button type="primary">Create Channel</Button>
+        <Button type="secondary" onClick={createChannelModal?.onClose}>Cancel</Button>
+        <Button type="primary" onClick={handleSubmit(onSubmit)}>Create Channel</Button>
       </div>
     </div>
-  );
+  ) : null
 };
 
 export default CreateChannelModal;
