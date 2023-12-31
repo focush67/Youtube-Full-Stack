@@ -72,8 +72,7 @@ const CreateChannelModal = () => {
             message: "Invalid name format",
           }}
           required
-          className="w-3/4"
-        />
+          className="w-3/4" type="text" />
 
         <Input
           id="handle"
@@ -86,8 +85,7 @@ const CreateChannelModal = () => {
             message: "Invalid handle format",
           }}
           required
-          className="w-3/4"
-        />
+          className="w-3/4" type="text" />
       </div>
       <div className="p-3 border-t border-neutral-700 flex justify-end gap-3">
         <Button type="secondary" onClick={createChannelModal?.onClose}>Cancel</Button>
