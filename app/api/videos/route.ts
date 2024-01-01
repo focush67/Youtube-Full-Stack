@@ -25,20 +25,3 @@ export async function POST(request: Request) {
 
   return NextResponse.json(newVideoCreated);
 }
-
-export async function DELETE(_: Request, { params }: { params: IParams }) {
-  console.log(`Delete request for video ${params.videoId} received at backend`);
-  return;
-  const currentChannel = await getCurrentChannnel();
-  if (!currentChannel) {
-    return NextResponse.error();
-  }
-
-  const video = await prisma.video.delete({
-    where: {
-      id: params.videoId,
-    },
-  });
-
-  return NextResponse.json(video);
-}

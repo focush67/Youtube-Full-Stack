@@ -42,7 +42,7 @@ const CreateChannelModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     axios
-      .post("/api/channels", data)
+      .post(`${process.env.NEXTAUTH_URL}/api/channels`, data)
       .then(() => {
         toast.success("Channel created successfully");
         createChannelModal?.onClose();

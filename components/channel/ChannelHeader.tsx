@@ -28,7 +28,7 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
           <div className="flex flex-col md:flex-row items-center gap-1 md:gap-3 text-stone-400">
             <p className="font-medium">{`@${channel.handle}`}</p>
             <p>{`${compact(channel?.subscriberCount)} Subscribers`}</p>
-            <p>{`${compact(videoCount)} Videos`}</p>
+            <p>{`${compact(videoCount.valueOf())} Videos`}</p>
           </div>
         </div>
       </div>

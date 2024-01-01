@@ -1,6 +1,6 @@
 "use client";
 
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { UploadVideoModalContext } from "@/contexts/UploadVideoModalContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useContext, useMemo } from "react";
@@ -16,7 +16,7 @@ import { useProtectedRoute } from "@/CustomHooks/useProtectedRoute";
 export default function UploadPage() {
   const router = useRouter();
 
-    useProtectedRoute();
+  useProtectedRoute();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -56,17 +56,25 @@ export default function UploadPage() {
     });
   };
 
-  const onSubmit:SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    axios.post("/api/videos",data).then(() => {
+    axios
+      .post(`${process.env.NEXTAUTH_URL}/api/videos`, data)
+      .then(() => {
         toast.success("Video Successfully Uploaded");
         router.push("/studio");
-    }).catch(() => toast.error("Failed to publish video")).finally(() => setIsLoading(false));
+      })
+      .catch(() => toast.error("Failed to publish video"))
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <>
-      { uploadVideoModal?.isOpen && <UploadVideoModal onUpload={(value) => changeValue("videoSrc", value)} />}
+      {uploadVideoModal?.isOpen && (
+        <UploadVideoModal
+          onUpload={(value) => changeValue("videoSrc", value)}
+        />
+      )}
 
       <div className="flex flex-col px-8 pt-4">
         <div className="flex justify-between">

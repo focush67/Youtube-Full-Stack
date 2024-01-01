@@ -23,7 +23,7 @@ const VideoDetailsCard: React.FC<VideoDetailsCardProps> = ({ video }) => {
   const handleDeleteVideo = useCallback(() => {
     if (confirm("Are you sure you want to delete this video ?")) {
       axios
-        .delete(`api/videos/${video.id}`)
+        .delete(`${process.env.NEXTAUTH_URL}/api/videos/${video.id}`)
         .then(() => {
           toast.success("Video Deleted");
           router.refresh();

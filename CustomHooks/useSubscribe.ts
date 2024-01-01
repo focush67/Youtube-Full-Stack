@@ -28,15 +28,21 @@ export const useSubscribe = ({ channelId }: UseSubscribeProps) => {
 
     try {
       if (hasSubscribed) {
-        await axios.delete("/api/users/subscriptions", {
-          data: {
-            channelId,
-          },
-        });
+        await axios.delete(
+          `${process.env.NEXTAUTH_URL}/api/users/subscriptions`,
+          {
+            data: {
+              channelId,
+            },
+          }
+        );
       } else {
-        await axios.post("/api/users/subscriptions", {
-          channelId,
-        });
+        await axios.post(
+          `${process.env.NEXTAUTH_URL}/api/users/subscriptions`,
+          {
+            channelId,
+          }
+        );
       }
 
       router.refresh();
