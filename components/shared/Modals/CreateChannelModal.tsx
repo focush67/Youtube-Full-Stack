@@ -14,6 +14,7 @@ import { useContext } from "react";
 const CreateChannelModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const createChannelModal = useContext(CreateChannelModalContext);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -38,18 +39,21 @@ const CreateChannelModal = () => {
     });
   };
 
-  const onSubmit:SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    axios.post("/api/channels",data).then(() => {
-      toast.success("Channel created successfully");
-      createChannelModal?.onClose();
-      useRouter().refresh();
-
-    }).catch(() => {
-      toast.error("Could not create channel")
-    }).finally(() => setIsLoading(false));
-    
-  }
+    axios
+      .post("/api/channels", data)
+      .then(() => {
+        toast.success("Channel created successfully");
+        createChannelModal?.onClose();
+        router.refresh();
+        return;
+      })
+      .catch(() => {
+        toast.error("Could not create channel");
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   return createChannelModal?.isOpen ? (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-zinc-800 w-3/5 max-w-sxl rounded-xl justify-center z-50">
@@ -72,7 +76,9 @@ const CreateChannelModal = () => {
             message: "Invalid name format",
           }}
           required
-          className="w-3/4" type="text" />
+          className="w-3/4"
+          type="text"
+        />
 
         <Input
           id="handle"
@@ -85,14 +91,20 @@ const CreateChannelModal = () => {
             message: "Invalid handle format",
           }}
           required
-          className="w-3/4" type="text" />
+          className="w-3/4"
+          type="text"
+        />
       </div>
       <div className="p-3 border-t border-neutral-700 flex justify-end gap-3">
-        <Button type="secondary" onClick={createChannelModal?.onClose}>Cancel</Button>
-        <Button type="primary" onClick={handleSubmit(onSubmit)}>Create Channel</Button>
+        <Button type="secondary" onClick={createChannelModal?.onClose}>
+          Cancel
+        </Button>
+        <Button type="primary" onClick={handleSubmit(onSubmit)}>
+          Create Channel
+        </Button>
       </div>
     </div>
-  ) : null
+  ) : null;
 };
 
 export default CreateChannelModal;
