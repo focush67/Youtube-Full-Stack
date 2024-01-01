@@ -40,7 +40,9 @@ export const useSubscribe = ({ channelId }: UseSubscribeProps) => {
       }
 
       router.refresh();
-      toast.success(hasSubscribed ? "Unsubscribed Successfully" : "Subscribed Successfully");
+      toast.success(
+        hasSubscribed ? "Unsubscribed Successfully" : "Subscribed Successfully"
+      );
     } catch (error: any) {
       toast.error(
         hasSubscribed ? "Could not unsubscribe" : "Could not subscribe"
@@ -48,10 +50,8 @@ export const useSubscribe = ({ channelId }: UseSubscribeProps) => {
     }
   }, [currentUser, channelId, hasSubscribed, router]);
 
-
-  return{
+  return {
     hasSubscribed,
     toggleSubscribe,
-  }
-
+  };
 };

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/shared/Navigation/Navigation";
 import CurrentUserProvider from "@/contexts/CurrentUserContext";
+import SidebarProvider from "@/contexts/SidebarContext";
 import getCurrentUser from "@/getCurrentUser";
 import CurrentChannelProvider from "@/contexts/CurrentChannelContext";
 import CreateChannelModalProvider from "@/contexts/CreateChannelContext";
@@ -40,8 +41,10 @@ export default async function RootLayout({
             <CreateChannelModal />
             <CurrentChannelProvider user={currentChannel}>
               <UploadVideoModalProvider>
-                <Navigation />
-                <div className="pt-16">{children}</div>
+                <SidebarProvider>
+                  <Navigation />
+                  <div className="pt-16">{children}</div>
+                </SidebarProvider>
               </UploadVideoModalProvider>
             </CurrentChannelProvider>
           </CurrentUserProvider>

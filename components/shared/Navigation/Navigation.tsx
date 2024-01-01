@@ -1,12 +1,15 @@
-import React from 'react'
-import Navbar from './Navbar/Navbar'
-
-const Navigation = () => {
+import React from "react";
+import Navbar from "./Navbar/Navbar";
+import Sidebar from "./Sidebar/Sidebar";
+import getCurrentSubscriptions from "@/getCurrentSubscriptions";
+const Navigation = async () => {
+  const subscriptions = await getCurrentSubscriptions();
   return (
     <>
-        <Navbar />
+      <Sidebar subscribedChannels={subscriptions} />
+      <Navbar />
     </>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;
