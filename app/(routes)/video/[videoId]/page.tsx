@@ -1,5 +1,7 @@
 import Description from "@/components/video/Description";
+import LikeSubscribe from "@/components/video/LikeAndSubscribe/LikeSubscribe";
 import VideoPlayer from "@/components/video/VideoPlayer";
+import getChannelById from "@/getChannelById";
 import increaseVideoViewCount from "@/increaseVideoViewCount";
 
 interface VideoPageProps {
@@ -12,12 +14,13 @@ export default async function VideoPage({
 }) {
   const { videoId } = params;
   const video = await increaseVideoViewCount({ videoId });
-
+  const channel = await getChannelById({ channelId: video?.channelId });
   return video ? (
     <div className="flex flex-col lg:flex-row mx-6 mt-2 gap-4">
       <div className="w-full lg:w-3/4 flex flex-col gap-4">
         <VideoPlayer videoSrc={video.videoSrc} />
         <h1 className="text-2xl font-medium break-all">{video.title}</h1>
+        <LikeSubscribe video={video} channel={channel!} />
         <Description video={video} />
       </div>
 
