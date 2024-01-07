@@ -37,11 +37,9 @@ export const useComment = ({ videoId }: UseCommentProps) => {
 
     try {
       if (text.trim()) {
-        await axios
-          .post(`${process.env.NEXTAUTH_URL}/api/comments/${videoId}`, data)
-          .then(() => {
-            setText("");
-          });
+        await axios.post(`/api/comments/${videoId}`, data).then(() => {
+          setText("");
+        });
       }
 
       router.refresh();

@@ -19,6 +19,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoSrc }) => {
   const [isPlaying, setisPlaying] = useState(false);
   const [isFullScreen, setisFullScreen] = useState(false);
   const [currentDuration, setcurrentDuration] = useState("00:00");
+  const [completeDuration, setCompleteDuration] = useState("00:00");
   const [_, setTrigger] = useState(false);
   const [completedPercentage, setCompletedPercentage] = useState(0);
 
@@ -118,10 +119,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoSrc }) => {
     [timeStampFormatter]
   );
 
-  const totalDuration = useMemo(
-    () => formatTimeStamp(videoRef.current?.duration || 0),
-    []
-  );
+  useEffect(() => {
+    const videoElement = videoRef.current;
+
+    const handleLoadedMetaData = () => {
+      setCompleteDuration(formatTimeStamp(videoElement?.duration || 0));
+    };
+
+    if (videoElement) {
+      videoElement.addEventListener("loadedmetadata", handleLoadedMetaData);
+    }
+
+    return () => {
+      videoElement?.removeEventListener("loadedmetadata", handleLoadedMetaData);
+    };
+  }, [videoRef, formatTimeStamp]);
 
   const updateTimeStamp = () => {
     setcurrentDuration(formatTimeStamp(videoRef.current?.currentTime || 0));
@@ -216,7 +228,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoSrc }) => {
             </div>
 
             <div className="text-sm">
-              {currentDuration} / {totalDuration}
+              {currentDuration} / {completeDuration}
             </div>
           </div>
           <div className="flex gap-2 p-3 items-center">

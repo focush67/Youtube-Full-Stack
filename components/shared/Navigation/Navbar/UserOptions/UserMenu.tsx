@@ -23,7 +23,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onClose }) => {
           label={"Your Channel"}
           onClick={() => {
             if (!currentChannel) {
-              createChannelModal?.onOpen();
+              createChannelModal?.onClose();
             } else {
               router.push(`/channel/${currentChannel.id}`);
             }

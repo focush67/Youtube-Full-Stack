@@ -43,53 +43,33 @@ export const useLikeDislike = ({ videoId }: UseLikeDislikeProps) => {
         if (action === "Like") {
           switch (status) {
             case LikedDislikedStatus.Liked:
-              await axios.delete(
-                `${process.env.NEXTAUTH_URL}/api/videos/${videoId}/like`
-              );
+              await axios.delete(`/api/videos/${videoId}/like`);
               break;
 
             case LikedDislikedStatus.Disliked:
-              axios
-                .delete(
-                  `${process.env.NEXTAUTH_URL}/api/videos/${videoId}/dislike`
-                )
-                .then(() => {
-                  axios.post(
-                    `${process.env.NEXTAUTH_URL}/api/videos/${videoId}/like`
-                  );
-                });
+              axios.delete(`/api/videos/${videoId}/dislike`).then(() => {
+                axios.post(`/api/videos/${videoId}/like`);
+              });
               break;
 
             default:
-              await axios.post(
-                `${process.env.NEXTAUTH_URL}/api/videos/${videoId}/like`
-              );
+              await axios.post(`/api/videos/${videoId}/like`);
               break;
           }
         } else {
           switch (status) {
             case LikedDislikedStatus.Liked:
-              axios
-                .delete(
-                  `${process.env.NEXTAUTH_URL}/api/videos/${videoId}/like`
-                )
-                .then(() => {
-                  axios.post(
-                    `${process.env.NEXTAUTH_URL}/api/videos/${videoId}/dislike`
-                  );
-                });
+              axios.delete(`/api/videos/${videoId}/like`).then(() => {
+                axios.post(`/api/videos/${videoId}/dislike`);
+              });
               break;
 
             case LikedDislikedStatus.Disliked:
-              axios.delete(
-                `${process.env.NEXTAUTH_URL}/api/videos/${videoId}/dislike`
-              );
+              axios.delete(`/api/videos/${videoId}/dislike`);
               break;
 
             default:
-              await axios.post(
-                `${process.env.NEXTAUTH_URL}/api/videos/${videoId}/dislike`
-              );
+              await axios.post(`/api/videos/${videoId}/dislike`);
               break;
           }
         }
