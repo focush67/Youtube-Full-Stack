@@ -30,7 +30,7 @@ const VideoDetailsCard: React.FC<VideoDetailsCardProps> = ({ video }) => {
         })
         .catch(() => toast.error("Failed to delete video"));
     }
-  }, [video.id]);
+  }, [video.id, router]);
 
   return (
     <div

@@ -21,9 +21,10 @@ export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const uploadVideoModal = useContext(UploadVideoModalContext);
+
   useEffect(() => {
     uploadVideoModal?.onOpen();
-  }, []);
+  }, [uploadVideoModal]);
 
   const videoId = useMemo(() => {
     const buffer = Buffer.alloc(12);
