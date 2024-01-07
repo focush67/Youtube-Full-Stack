@@ -9,7 +9,6 @@ export async function getRecommendedVideos(
   params: GetRecommendedVideosProps
 ): Promise<(Video & { channel: Channel })[]> {
   const { video } = params;
-
   try {
     const videos = (await prisma.video.aggregateRaw({
       pipeline: [
@@ -52,7 +51,8 @@ export async function getRecommendedVideos(
       ],
     })) as unknown as (Video & { channel: Channel })[];
 
-    return videos.filter((video) => video.id !== video.id);
+    //console.log("Recommended Videos from Custom Hook: ", videos);
+    return videos.filter((v) => v.id !== video?.id);
   } catch (error: any) {
     throw new Error(error);
   }

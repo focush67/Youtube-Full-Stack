@@ -21,6 +21,7 @@ export default async function VideoPage({
   const channel = await getChannelById({ channelId: video?.channelId });
   const comments = await getCommentsByVideoId({ videoId });
   const recommendedVideos = await getRecommendedVideos({ video });
+  console.log("Recommended Videos: ", recommendedVideos);
   return video && channel && comments ? (
     <div className="flex flex-col lg:flex-row mx-6 mt-2 gap-4">
       <div className="w-full lg:w-3/4 flex flex-col gap-4">
