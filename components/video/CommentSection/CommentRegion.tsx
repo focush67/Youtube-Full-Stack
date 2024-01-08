@@ -15,7 +15,12 @@ const CommentRegion: React.FC<CommentRegionProps> = ({ comments, videoId }) => {
       <CommentInput videoId={videoId} />
       <div className="flex flex-col gap-4 mt-4">
         {comments.map((comment) => {
-          return <Comment key={comment.id} comment={comment} />;
+          return (
+            <>
+              <Comment key={comment.id} comment={comment} />
+              <br className="bg-red-500" />
+            </>
+          );
         })}
       </div>
     </div>

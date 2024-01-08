@@ -15,7 +15,7 @@ const UserOptions = () => {
   const currentUser = useContext(CurrentUserContext);
   const currentChannel = useContext(CurrentChannelContext);
   const createChannel = useContext(CreateChannelModalContext);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const handleUploadClick = () => {
     if (!currentChannel) {
       createChannel?.onOpen();
