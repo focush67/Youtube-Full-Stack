@@ -23,10 +23,12 @@ export default async function VideoPage({
   const recommendedVideos = await getRecommendedVideos({ video });
   // console.log("Recommended Videos: ", recommendedVideos);
   return video && channel && comments ? (
-    <div className="flex flex-col lg:flex-row mx-6 mt-2 gap-4">
+    <div className="flex flex-col lg:flex-row mx-3 mt-2 gap-4">
       <div className="w-full lg:w-3/4 flex flex-col gap-4">
         <VideoPlayer videoSrc={video.videoSrc} />
-        <h1 className="text-2xl font-medium break-all">{video.title}</h1>
+        <h1 className="md:text-xl lg:text-2xl font-medium break-all">
+          {video.title}
+        </h1>
         <LikeSubscribe video={video} channel={channel!} />
         <Description video={video} />
         <CommentRegion comments={comments!} videoId={video.id} />

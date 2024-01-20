@@ -13,8 +13,12 @@ const StudioPage = async () => {
       <div className="flex flex-col gap-4 mt-8">
         <h2 className="text-2xl">Videos</h2>
         {videos && videos.length
-          ? videos.map((video) => {
-              return <VideoDetailsCard video={video} key={video.id} />;
+          ? videos.map((video, index) => {
+              return (
+                <div key={index}>
+                  <VideoDetailsCard video={video} key={video.id} />
+                </div>
+              );
             })
           : "Upload Videos"}
       </div>

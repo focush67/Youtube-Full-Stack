@@ -35,20 +35,22 @@ const VideoDetailsCard: React.FC<VideoDetailsCardProps> = ({ video }) => {
   return (
     <div
       key={video.id}
-      className="flex gap-6 justify-between items-center bg-neutral-800 p-4 rounded-lg"
+      className="flex gap-6 justify-between items-center bg-neutral-800 p-4 rounded-lg w-full"
     >
       <Link href={`video/${video.id}`}>
         <Image
           src={video.thumbnailSrc}
           className="aspect-video"
           alt={`${video.title} thumbnail`}
-          height={90}
-          width={160}
+          height={100}
+          width={100}
         />
       </Link>
 
-      <div className="flex flex-col">
-        <p>{dayjs(video.createdAt).format("MMM D, YYYY")}</p>
+      <div className="flex flex-col ">
+        <p className="text-sm">
+          {dayjs(video.createdAt).format("MMM D, YYYY")}
+        </p>
         <p className="text-sm text-neutral-400">Published</p>
       </div>
 
@@ -58,7 +60,9 @@ const VideoDetailsCard: React.FC<VideoDetailsCardProps> = ({ video }) => {
       </div>
 
       <div className="flex flex-col">
-        <p>{likeFraction ? `${likeFraction * 100} %` : "-"}</p>
+        <p className="text-[12px] md:text-sm">
+          {likeFraction ? `${likeFraction * 100} %` : "-"}
+        </p>
         <p className="text-sm text-neutral-400">{video.likeCount} Likes</p>
       </div>
 
