@@ -24,18 +24,18 @@ const LikeSubscribe: React.FC<LikeSubscribeProps> = ({ video, channel }) => {
           <UserAvatar size={UserAvatarSize.md} imageSrc={channel.imageSrc} />
         </Link>
 
-        <div className="flex flex-col justify-between mr-2">
+        <div className="flex flex-col justify-between">
           <Link href={`/channel/${channel.id}`}>
-            <h2 className="text-lg">{channel.name}</h2>
+            <h2 className="md:text-sm lg:text-md xl:text-lg">{channel.name}</h2>
           </Link>
-          <p className="text-neutral-400 text-sm">
+          <p className="text-neutral-400 text-[13px]">
             {compact(channel.subscriberCount)} subscribers
           </p>
         </div>
 
         {channel.userId === currentUser?.id ? (
           <Link href={"/studio"}>
-            <Button type="rounded-dark">Manage Videos</Button>
+            <Button type="rounded-dark">Manage</Button>
           </Link>
         ) : (
           <SubscribeButton channelId={channel.id} />
