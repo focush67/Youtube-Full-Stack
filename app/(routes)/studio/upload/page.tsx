@@ -24,7 +24,7 @@ export default function UploadPage() {
 
   useEffect(() => {
     uploadVideoModal?.onOpen();
-  }, [uploadVideoModal]);
+  }, []);
 
   const videoId = useMemo(() => {
     const buffer = Buffer.alloc(12);
@@ -46,7 +46,7 @@ export default function UploadPage() {
     },
   });
 
-  const thumbnailSrc: string = watch("thumnailSrc");
+  const thumbnailSrc: string = watch("thumbnailSrc");
   const videoSrc: string = watch("videoSrc");
 
   const changeValue = (id: string, value: string) => {
@@ -60,7 +60,7 @@ export default function UploadPage() {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     axios
-      .post(`${process.env.NEXTAUTH_URL}/api/videos`, data)
+      .post(`/api/videos`, data)
       .then(() => {
         toast.success("Video Successfully Uploaded");
         router.push("/studio");
@@ -81,7 +81,10 @@ export default function UploadPage() {
         <div className="flex justify-between">
           <h1 className="text-2xl">Video Details</h1>
           <span className="flex gap-4">
-            <Button type="secondary" onClick={() => router.back()}>
+            <Button
+              type="secondary"
+              onClick={() => uploadVideoModal?.onClose()}
+            >
               Cancel
             </Button>
             <Button type="box" onClick={handleSubmit(onSubmit)}>

@@ -1,25 +1,29 @@
 "use client";
 
-import{useState,createContext} from "react";
+import { useState, createContext } from "react";
 type ModalState = {
-    isOpen: boolean;
-    onOpen: () => void;
-    onClose: () => void;
-}
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+};
 
-export const UploadVideoModalContext = createContext<ModalState | null>(null)
+export const UploadVideoModalContext = createContext<ModalState | null>(null);
 
-const UploadVideoModalProvider:React.FC<React.PropsWithChildren> = ({children}) => {
-
-    const [isOpen,setIsOpen] = useState(false);
-    return(
-        <UploadVideoModalContext.Provider value={{
-            isOpen,
-            onOpen: () => setIsOpen(true),
-            onClose: () => setIsOpen(false)
-        }}>{children}</UploadVideoModalContext.Provider>
-    )
-}
-
+const UploadVideoModalProvider: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <UploadVideoModalContext.Provider
+      value={{
+        isOpen,
+        onOpen: () => setIsOpen(true),
+        onClose: () => setIsOpen(false),
+      }}
+    >
+      {children}
+    </UploadVideoModalContext.Provider>
+  );
+};
 
 export default UploadVideoModalProvider;
