@@ -19,7 +19,7 @@ const LikeDislikeButton: React.FC<LikeDislikeButtonProps> = ({ video }) => {
   const { status, toggleLikeDislike } = useLikeDislike({ videoId: video.id });
   return (
     <div
-      className={`flex items-center gap-2 bg-neutral-800 rounded-full px-3 sm:px-1 py-2 text-white font-medium`}
+      className={`flex items-center gap-2 bg-neutral-800 rounded-full px-3 sm:px-3 py-2 text-white font-medium`}
     >
       <button
         className="pr-3 border-r-2 border-neutral-600 flex items-center gap-1"

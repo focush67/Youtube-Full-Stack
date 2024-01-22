@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import VideoCard from "@/components/shared/VideoCard";
+import Loading from "@/app/loading";
 
 export default function SearchPage() {
   const params = useSearchParams();
@@ -23,21 +24,23 @@ export default function SearchPage() {
   }, [searchQuery]);
 
   return (
-    <div className="w-4/5 mx-auto flex flex-col gap-4 items-center pb-4">
-      {videos.length
-        ? videos.map((video) => {
-            return (
-              <VideoCard
-                key={video.id}
-                isVertical={false}
-                video={video}
-                channel={video.channel}
-                includeDescription
-                channelAvatar
-              />
-            );
-          })
-        : "No videos were found"}
+    <div className="w-4/5 mx-auto flex flex-col gap-4 items-center pb-4 justify-center mt-[5%]">
+      {videos.length ? (
+        videos.map((video) => {
+          return (
+            <VideoCard
+              key={video.id}
+              isVertical={false}
+              video={video}
+              channel={video.channel}
+              includeDescription
+              channelAvatar
+            />
+          );
+        })
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }

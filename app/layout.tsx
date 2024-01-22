@@ -11,6 +11,7 @@ import CreateChannelModal from "@/components/shared/Modals/CreateChannelModal";
 import { Toaster } from "react-hot-toast";
 import getCurrentChannel from "@/getCurrentChannel";
 import UploadVideoModalProvider from "@/contexts/UploadVideoModalContext";
+
 const inter = Inter({
   subsets: ["latin"],
   weight: ["100", "300", "400", "500", "700", "900"],

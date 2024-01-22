@@ -35,7 +35,7 @@ const VideoDetailsCard: React.FC<VideoDetailsCardProps> = ({ video }) => {
   return (
     <div
       key={video.id}
-      className="flex gap-6 justify-between items-center bg-neutral-800 p-4 rounded-lg w-full"
+      className="flex gap-3 justify-between items-center bg-neutral-800 p-4 md:p-2 rounded-lg w-full overflow-x-auto"
     >
       <Link href={`video/${video.id}`}>
         <Image
@@ -47,27 +47,31 @@ const VideoDetailsCard: React.FC<VideoDetailsCardProps> = ({ video }) => {
         />
       </Link>
 
-      <div className="flex flex-col ">
-        <p className="text-sm">
+      <div className="flex flex-col items-center">
+        <p className="text-sm md:text-md lg:text-lg">
           {dayjs(video.createdAt).format("MMM D, YYYY")}
         </p>
-        <p className="text-sm text-neutral-400">Published</p>
+        <p className="text-xs md:text-sm text-neutral-400">Published</p>
       </div>
 
-      <div className="flex flex-col">
-        <p>{compact(video.viewCount)}</p>
-        <p className="text-sm text-neutral-400">Views</p>
+      <div className="flex flex-col items-center">
+        <p className="text-sm md:text-md lg:text-lg">
+          {compact(video.viewCount)}
+        </p>
+        <p className="text-xs md:text-sm text-neutral-400">Views</p>
       </div>
 
-      <div className="flex flex-col">
-        <p className="text-[12px] md:text-sm">
+      <div className="flex flex-col items-center">
+        <p className="text-xs md:text-sm lg:text-md">
           {likeFraction ? `${likeFraction * 100} %` : "-"}
         </p>
-        <p className="text-sm text-neutral-400">{video.likeCount} Likes</p>
+        <p className="text-xs md:text-sm text-neutral-400">
+          {video.likeCount} Likes
+        </p>
       </div>
 
       <MdDelete
-        className="h-6 w-6 cursor-pointer"
+        className="h-6 w-6  cursor-pointer"
         onClick={handleDeleteVideo}
       />
     </div>
