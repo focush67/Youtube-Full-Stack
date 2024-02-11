@@ -1,4 +1,4 @@
-import getTrendingVideos from "@/getTrendingVideos";
+import getTrendingVideos from "@/services/getTrendingVideos";
 import VideoCard from "@/components/shared/VideoCard";
 
 export default async function Home() {

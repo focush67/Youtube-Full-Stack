@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  LikedDislikedStatus,
-  useLikeDislike,
-} from "@/CustomHooks/useLikeDislike";
+import { LikedDislikedStatus, useLikeDislike } from "@/hooks/useLikeDislike";
 import { compact } from "@/utilities/Num";
 import { Video } from "@prisma/client";
 import {

@@ -12,7 +12,7 @@ import { v4 as uuid } from "uuid";
 import { useState } from "react";
 import UploadVideoModal from "@/components/shared/Modals/UploadVideoModal";
 import axios from "axios";
-import { useProtectedRoute } from "@/CustomHooks/useProtectedRoute";
+import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 export default function UploadPage() {
   const router = useRouter();
 

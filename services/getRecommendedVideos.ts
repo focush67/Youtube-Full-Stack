@@ -1,4 +1,4 @@
-import prisma from "./vendor/database";
+import prisma from "../vendor/database";
 import { Channel, Video } from "@prisma/client";
 
 interface GetRecommendedVideosProps {

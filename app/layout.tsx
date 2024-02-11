@@ -4,12 +4,12 @@ import "./globals.css";
 import Navigation from "@/components/shared/Navigation/Navigation";
 import CurrentUserProvider from "@/contexts/CurrentUserContext";
 import SidebarProvider from "@/contexts/SidebarContext";
-import getCurrentUser from "@/getCurrentUser";
+import getCurrentUser from "@/services/getCurrentUser";
 import CurrentChannelProvider from "@/contexts/CurrentChannelContext";
 import CreateChannelModalProvider from "@/contexts/CreateChannelContext";
 import CreateChannelModal from "@/components/shared/Modals/CreateChannelModal";
 import { Toaster } from "react-hot-toast";
-import getCurrentChannel from "@/getCurrentChannel";
+import getCurrentChannel from "@/services/getCurrentChannel";
 import UploadVideoModalProvider from "@/contexts/UploadVideoModalContext";
 
 const inter = Inter({

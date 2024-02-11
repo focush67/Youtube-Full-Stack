@@ -3,10 +3,10 @@ import CommentRegion from "@/components/video/CommentSection/CommentRegion";
 import Description from "@/components/video/Description";
 import LikeSubscribe from "@/components/video/LikeAndSubscribe/LikeSubscribe";
 import VideoPlayer from "@/components/video/VideoPlayer";
-import getChannelById from "@/getChannelById";
-import getCommentsByVideoId from "@/getCommentsByVideoId";
-import { getRecommendedVideos } from "@/getRecommendedVideos";
-import increaseVideoViewCount from "@/increaseVideoViewCount";
+import getChannelById from "@/services/getChannelById";
+import getCommentsByVideoId from "@/services/getCommentsByVideoId";
+import { getRecommendedVideos } from "@/services/getRecommendedVideos";
+import increaseVideoViewCount from "@/services/increaseVideoViewCount";
 
 interface VideoPageProps {
   videoId: string;

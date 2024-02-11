@@ -1,6 +1,6 @@
 import { Channel, Video } from "@prisma/client";
 import getCurrentUser from "./getCurrentUser";
-import prisma from "./vendor/database";
+import prisma from "../vendor/database";
 
 export default async function getVideosOfSubscriptions(): Promise<
   (Video & { channel: Channel })[]

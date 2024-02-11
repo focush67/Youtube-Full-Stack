@@ -1,4 +1,4 @@
-import { useComment } from "@/CustomHooks/useComment";
+import { useComment } from "@/hooks/useComment";
 import Button from "@/components/shared/Button";
 import UserAvatar from "@/components/shared/UserAvatar";
 import { CurrentChannelContext } from "@/contexts/CurrentChannelContext";

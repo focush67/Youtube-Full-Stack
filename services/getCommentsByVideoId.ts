@@ -1,5 +1,5 @@
 import { Channel, Comment } from "@prisma/client";
-import prisma from "./vendor/database";
+import prisma from "../vendor/database";
 interface GetCommentsByVideoIdProps {
   videoId: string;
 }

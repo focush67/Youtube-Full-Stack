@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utilities/authExports";
-import prisma from "./vendor/database";
+import prisma from "../vendor/database";
 export default async function getCurrentUser() {
   try {
     const session = await getServerSession(authOptions);

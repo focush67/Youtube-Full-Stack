@@ -1,6 +1,6 @@
 "use client";
 
-import { useProtectedRoute } from "@/CustomHooks/useProtectedRoute";
+import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 import { CurrentChannelContext } from "@/contexts/CurrentChannelContext";
 import { Video } from "@prisma/client";
 import { useContext, useMemo } from "react";

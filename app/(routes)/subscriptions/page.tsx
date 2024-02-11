@@ -1,5 +1,5 @@
 import Subscriptions from "@/components/subscriptions/Subscriptions";
-import getVideosOfSubscriptions from "@/getVideosOfSubscriptions";
+import getVideosOfSubscriptions from "@/services/getVideosOfSubscriptions";
 
 export default async function SubscriptionsPage() {
   const subscriptionVideos = await getVideosOfSubscriptions();

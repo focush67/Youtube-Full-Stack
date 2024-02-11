@@ -1,4 +1,4 @@
-import getCurrentUser from "@/getCurrentUser";
+import getCurrentUser from "@/services/getCurrentUser";
 import prisma from "@/vendor/database";
 import { NextResponse } from "next/server";
 import { IParams } from "../like/route";

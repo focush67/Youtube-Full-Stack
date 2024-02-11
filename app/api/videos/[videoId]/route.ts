@@ -1,4 +1,4 @@
-import getCurrentChannnel from "@/getCurrentChannel";
+import getCurrentChannnel from "@/services/getCurrentChannel";
 import prisma from "@/vendor/database";
 import { NextResponse } from "next/server";
 import { IParams } from "./like/route";

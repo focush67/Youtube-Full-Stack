@@ -1,7 +1,7 @@
 import AnalyticsSummary from "@/components/studio/AnalyticsSummary";
 import VideoDetailsCard from "@/components/studio/VideoDetailsCard";
-import getCurrentChannnel from "@/getCurrentChannel";
-import getVideosByChannelId from "@/getVideosByChannelld";
+import getCurrentChannnel from "@/services/getCurrentChannel";
+import getVideosByChannelId from "@/services/getVideosByChannelld";
 import React from "react";
 
 const StudioPage = async () => {
