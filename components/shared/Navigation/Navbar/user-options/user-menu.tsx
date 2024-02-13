@@ -1,19 +1,22 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import MenuItems from "./MenuItems";
+import MenuItems from "./menu-items";
 import { PiUserSquareFill, PiYoutubeLogo, PiSignOut } from "react-icons/pi";
 import { useContext } from "react";
-import { CreateChannelModalContext } from "@/contexts/CreateChannelContext";
-import { CurrentChannelContext } from "@/contexts/CurrentChannelContext";
+import { CreateChannelModalContext } from "@/contexts/create-channel-context";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { getCurrentChannelState } from "@/redux/store";
+
 interface UserMenuProps {
   onClose: () => void;
 }
 const UserMenu: React.FC<UserMenuProps> = ({ onClose }) => {
   const createChannelModal = useContext(CreateChannelModalContext);
-  const currentChannel = useContext(CurrentChannelContext);
+  const currentChannel = useSelector(getCurrentChannelState);
   const router = useRouter();
+
   return (
     <>
       <div className="h-screen w-screen fixed z-30" onClick={onClose} />

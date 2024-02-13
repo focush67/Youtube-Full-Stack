@@ -1,4 +1,4 @@
-import Subscriptions from "@/components/subscriptions/Subscriptions";
+import Subscriptions from "@/components/subscriptions/subscriptions";
 import getVideosOfSubscriptions from "@/services/getVideosOfSubscriptions";
 
 export default async function SubscriptionsPage() {

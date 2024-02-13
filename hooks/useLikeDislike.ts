@@ -1,8 +1,15 @@
-import { CurrentUserContext } from "@/contexts/CurrentUserContext";
-import { useCallback, useContext, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUserState } from "@/redux/store";
+import {
+  addDislike,
+  addLike,
+  removeDisLike,
+  removeLike,
+} from "@/redux/slices/current-user";
 interface UseLikeDislikeProps {
   videoId: string;
 }
@@ -14,7 +21,8 @@ export enum LikedDislikedStatus {
 }
 
 export const useLikeDislike = ({ videoId }: UseLikeDislikeProps) => {
-  const currentUser = useContext(CurrentUserContext);
+  const dispatch = useDispatch();
+  const currentUser = useSelector(getCurrentUserState);
   const router = useRouter();
 
   const status = useMemo(() => {
@@ -42,34 +50,47 @@ export const useLikeDislike = ({ videoId }: UseLikeDislikeProps) => {
       try {
         if (action === "Like") {
           switch (status) {
-            case LikedDislikedStatus.Liked:
+            case LikedDislikedStatus.Liked: // If the video is already liked , delete the like
+              dispatch(removeLike({ id: videoId }));
               await axios.delete(`/api/videos/${videoId}/like`);
+
               break;
 
-            case LikedDislikedStatus.Disliked:
-              axios.delete(`/api/videos/${videoId}/dislike`).then(() => {
-                axios.post(`/api/videos/${videoId}/like`);
-              });
-              break;
-
-            default:
+            case LikedDislikedStatus.Disliked: // If the video is disliked , remove the dislike and then add the like
+              dispatch(removeDisLike({ id: videoId }));
+              await axios.delete(`/api/videos/${videoId}/dislike`);
+              dispatch(addLike({ id: videoId }));
               await axios.post(`/api/videos/${videoId}/like`);
+
+              break;
+
+            default: // If the video is neither liked nor disliked , normally add a like
+              dispatch(addLike({ id: videoId }));
+              await axios.post(`/api/videos/${videoId}/like`);
+
               break;
           }
         } else {
           switch (status) {
-            case LikedDislikedStatus.Liked:
-              axios.delete(`/api/videos/${videoId}/like`).then(() => {
-                axios.post(`/api/videos/${videoId}/dislike`);
-              });
-              break;
+            case LikedDislikedStatus.Liked: // If the video is liked , remove the like and add a dislike
+              dispatch(removeLike({ id: videoId }));
+              await axios.delete(`/api/videos/${videoId}/like`);
 
-            case LikedDislikedStatus.Disliked:
-              axios.delete(`/api/videos/${videoId}/dislike`);
-              break;
-
-            default:
+              dispatch(addDislike({ id: videoId }));
               await axios.post(`/api/videos/${videoId}/dislike`);
+
+              break;
+
+            case LikedDislikedStatus.Disliked: // If the video is already disliked , remove the dislike
+              dispatch(removeDisLike({ id: videoId }));
+              axios.delete(`/api/videos/${videoId}/dislike`);
+
+              break;
+
+            default: // If the video is neither liked nor disliked , simply add a dislike
+              dispatch(addDislike({ id: videoId }));
+              await axios.post(`/api/videos/${videoId}/dislike`);
+
               break;
           }
         }

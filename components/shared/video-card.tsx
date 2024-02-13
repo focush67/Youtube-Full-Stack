@@ -3,8 +3,8 @@
 import { Channel, Video } from "@prisma/client";
 import Link from "next/link";
 import Image from "next/image";
-import UserAvatar, { UserAvatarSize } from "./UserAvatar";
-import { compact } from "@/utilities/Num";
+import UserAvatar, { UserAvatarSize } from "./user-avatar";
+import { compact } from "@/utilities/num";
 import dayjs from "@/vendor/dayjs";
 
 interface VideoCardProps {
@@ -76,19 +76,17 @@ const VideoCard: React.FC<VideoCardProps> = ({
               {dayjs(video.createdAt).fromNow()}
             </p>
 
-            {
-                includeDescription ? (
-                    <div className="whitespace-line text-neutral-400 text-sm">
-                        {
-                            video.description.split("\n").map((line,index) => {
-                                return line === "" ? (<br key={index}/>) : (
-                                    <p key={index}>{line}</p>
-                                )
-                            })
-                        }
-                    </div>
-                ) : (null)
-            }
+            {includeDescription ? (
+              <div className="whitespace-line text-neutral-400 text-sm">
+                {video.description.split("\n").map((line, index) => {
+                  return line === "" ? (
+                    <br key={index} />
+                  ) : (
+                    <p key={index}>{line}</p>
+                  );
+                })}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

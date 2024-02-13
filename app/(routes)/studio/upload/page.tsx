@@ -1,16 +1,16 @@
 "use client";
 
 import { toast } from "react-hot-toast";
-import { UploadVideoModalContext } from "@/contexts/UploadVideoModalContext";
+import { UploadVideoModalContext } from "@/contexts/upload-video-context";
 import { useRouter } from "next/navigation";
 import { useEffect, useContext, useMemo } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 import VideoUploadForm from "@/components/studio/upload/VideoUploadForm";
 import VideoPreview from "@/components/studio/upload/VideoPreview";
 import { v4 as uuid } from "uuid";
 import { useState } from "react";
-import UploadVideoModal from "@/components/shared/Modals/UploadVideoModal";
+import UploadVideoModal from "@/components/shared/Modals/upload-video";
 import axios from "axios";
 import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 export default function UploadPage() {
@@ -24,7 +24,7 @@ export default function UploadPage() {
 
   useEffect(() => {
     uploadVideoModal?.onOpen();
-  }, []);
+  }, [uploadVideoModal]);
 
   const videoId = useMemo(() => {
     const buffer = Buffer.alloc(12);

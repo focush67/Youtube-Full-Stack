@@ -1,19 +1,19 @@
 "use client";
 
-import { CreateChannelModalContext } from "@/contexts/CreateChannelContext";
-import { CurrentChannelContext } from "@/contexts/CurrentChannelContext";
-import { CurrentUserContext } from "@/contexts/CurrentUserContext";
+import { CreateChannelModalContext } from "@/contexts/create-channel-context";
+import { getCurrentChannelState, getCurrentUserState } from "@/redux/store";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback, useContext, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 interface UseCommentProps {
   videoId: string | null;
 }
 export const useComment = ({ videoId }: UseCommentProps) => {
-  const currentChannel = useContext(CurrentChannelContext);
-  const currentUser = useContext(CurrentUserContext);
+  const currentChannel = useSelector(getCurrentChannelState);
+  const currentUser = useSelector(getCurrentUserState);
   const createChannelModal = useContext(CreateChannelModalContext);
 
   const router = useRouter();

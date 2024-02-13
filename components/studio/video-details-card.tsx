@@ -4,12 +4,13 @@ import { Video } from "@prisma/client";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
 import dayjs from "@/vendor/dayjs";
-import { compact } from "@/utilities/Num";
-import { MdDelete } from "react-icons/md";
+import { compact } from "@/utilities/num";
+import { MdDelete, MdEdit } from "react-icons/md";
+import EditModal from "../shared/Modals/edit-video";
 
 interface VideoDetailsCardProps {
   video: Video;
@@ -17,8 +18,17 @@ interface VideoDetailsCardProps {
 
 const VideoDetailsCard: React.FC<VideoDetailsCardProps> = ({ video }) => {
   const router = useRouter();
+  const [edit, setEdit] = useState(false);
 
   const likeFraction = video.likeCount / (video.likeCount + video.dislikeCount);
+
+  const handleEditVideoOpen = () => {
+    setEdit(true);
+  };
+
+  const handleEditVideoClose = () => {
+    setEdit(false);
+  };
 
   const handleDeleteVideo = useCallback(() => {
     if (confirm("Are you sure you want to delete this video ?")) {
@@ -69,11 +79,17 @@ const VideoDetailsCard: React.FC<VideoDetailsCardProps> = ({ video }) => {
           {video.likeCount} Likes
         </p>
       </div>
-
-      <MdDelete
-        className="h-6 w-6  cursor-pointer"
-        onClick={handleDeleteVideo}
-      />
+      <div className="flex gap-5">
+        <MdDelete
+          className="h-4 w-4 cursor-pointer"
+          onClick={handleDeleteVideo}
+        />
+        <MdEdit
+          className="h-4 w-4 cursor-pointer"
+          onClick={handleEditVideoOpen}
+        />
+        {edit && <EditModal onClose={handleEditVideoClose} video={video} />}
+      </div>
     </div>
   );
 };

@@ -1,8 +1,8 @@
-import VideoCard from "@/components/shared/VideoCard";
-import CommentRegion from "@/components/video/CommentSection/CommentRegion";
-import Description from "@/components/video/Description";
-import LikeSubscribe from "@/components/video/LikeAndSubscribe/LikeSubscribe";
-import VideoPlayer from "@/components/video/VideoPlayer";
+import VideoCard from "@/components/shared/video-card";
+import CommentRegion from "@/components/video/comment-section/comment-region";
+import Description from "@/components/video/description";
+import LikeSubscribe from "@/components/video/like-and-subscribe.tsx/LikeSubscribe";
+import VideoPlayer from "@/components/video/video-player";
 import getChannelById from "@/services/getChannelById";
 import getCommentsByVideoId from "@/services/getCommentsByVideoId";
 import { getRecommendedVideos } from "@/services/getRecommendedVideos";
@@ -21,7 +21,7 @@ export default async function VideoPage({
   const channel = await getChannelById({ channelId: video?.channelId });
   const comments = await getCommentsByVideoId({ videoId });
   const recommendedVideos = await getRecommendedVideos({ video });
-  // console.log("Recommended Videos: ", recommendedVideos);
+
   return video && channel && comments ? (
     <div className="flex flex-col lg:flex-row mx-3 mt-2 gap-4">
       <div className="w-full lg:w-3/4 flex flex-col gap-4">

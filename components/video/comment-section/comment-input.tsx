@@ -1,14 +1,15 @@
 import { useComment } from "@/hooks/useComment";
-import Button from "@/components/shared/Button";
-import UserAvatar from "@/components/shared/UserAvatar";
-import { CurrentChannelContext } from "@/contexts/CurrentChannelContext";
-import React, { useContext } from "react";
+import Button from "@/components/shared/button";
+import UserAvatar from "@/components/shared/user-avatar";
+import React from "react";
+import { useSelector } from "react-redux";
+import { getCurrentChannelState } from "@/redux/store";
 
 interface CommentInputProps {
   videoId: string;
 }
 const CommentInput: React.FC<CommentInputProps> = ({ videoId }) => {
-  const currentChannel = useContext(CurrentChannelContext);
+  const currentChannel = useSelector(getCurrentChannelState);
   const { text, setText, submitComment } = useComment({ videoId });
 
   return (

@@ -2,7 +2,7 @@
 
 import dayjs from "@/vendor/dayjs";
 import { Channel, Comment } from "@prisma/client";
-import UserAvatar from "@/components/shared/UserAvatar";
+import UserAvatar from "@/components/shared/user-avatar";
 
 interface CommentProps {
   comment: Comment & { channel: Channel };

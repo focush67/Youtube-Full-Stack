@@ -1,12 +1,12 @@
 "use client";
 
-import { UploadVideoModalContext } from "@/contexts/UploadVideoModalContext";
+import { UploadVideoModalContext } from "@/contexts/upload-video-context";
 import { useRouter } from "next/navigation";
 import { MdClose, MdUpload } from "react-icons/md";
 import { useContext } from "react";
-import MediaUpload from "../MediaUpload";
-import IconButton from "../IconButton";
-import Button from "../Button";
+import MediaUpload from "../media-upload";
+import IconButton from "../icon-button";
+import Button from "../button";
 
 interface UploadVideoModalProps {
   onUpload: (value: string) => void;
@@ -16,10 +16,11 @@ const UploadVideoModal: React.FC<UploadVideoModalProps> = ({ onUpload }) => {
   const router = useRouter();
   const uploadVideoModal = useContext(UploadVideoModalContext);
 
-  const handleUpload = (value:string) => {
-    onUpload(value);
+  const handleUpload = (value: string) => {
     uploadVideoModal?.onClose();
-  }
+    onUpload(value);
+  };
+
   return (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-start bg-zinc-800 w-5/6 h-5/6 rounded-xl z-50">
       <div className="p-3 border-b border-neutral-700 flex justify-between">
@@ -27,7 +28,8 @@ const UploadVideoModal: React.FC<UploadVideoModalProps> = ({ onUpload }) => {
         <MdClose
           className="h-6 w-6 cursor-pointer"
           onClick={() => {
-            uploadVideoModal?.onClose(), router.back();
+            uploadVideoModal?.onClose();
+            router.back();
           }}
         />
       </div>

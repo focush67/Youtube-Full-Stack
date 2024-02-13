@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./Navbar/Navbar";
-import Sidebar from "./Sidebar/Sidebar";
+import Navbar from "./Navbar/navbar";
+import Sidebar from "./sidebar/sidebar";
 import getCurrentSubscriptions from "@/services/getCurrentSubscriptions";
 const Navigation = async () => {
   const subscriptions = await getCurrentSubscriptions();

@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import VideoCard from "@/components/shared/VideoCard";
+import VideoCard from "@/components/shared/video-card";
 import Loading from "@/app/loading";
 
 export default function SearchPage() {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import IconButton from "@/components/shared/IconButton";
+import IconButton from "@/components/shared/icon-button";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { toast } from "react-hot-toast";
 

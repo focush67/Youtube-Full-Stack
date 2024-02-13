@@ -1,13 +1,13 @@
 "use client";
 
-import { CurrentUserContext } from "@/contexts/CurrentUserContext";
 import { Channel } from "@prisma/client";
-import { useContext } from "react";
-import UserAvatar, { UserAvatarSize } from "../shared/UserAvatar";
-import { compact } from "@/utilities/Num";
+import UserAvatar, { UserAvatarSize } from "../shared/user-avatar";
+import { compact } from "@/utilities/num";
 import Link from "next/link";
-import Button from "../shared/Button";
-import SubscribeButton from "../shared/SubscribeButton";
+import Button from "../shared/button";
+import SubscribeButton from "../shared/subscribe-button";
+import { useSelector } from "react-redux";
+import { getCurrentUserState } from "@/redux/store";
 
 interface ChannelHeaderProps {
   channel: Channel;
@@ -17,7 +17,8 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
   channel,
   videoCount,
 }) => {
-  const currentUser = useContext(CurrentUserContext);
+  const stateUser = useSelector(getCurrentUserState);
+
   return (
     <div className="flex flex-col md:flex-row gap-6 md:gap-0 px-24 py-6 justify-between items-center">
       <div className="flex flex-col md:flex-row gap-0 md:gap-6 items-center md:items-start">
@@ -33,7 +34,7 @@ const ChannelHeader: React.FC<ChannelHeaderProps> = ({
         </div>
       </div>
 
-      {channel.userId === currentUser?.id ? (
+      {channel.userId === stateUser?.id ? (
         <Link href={"/studio"}>
           <Button type="rounded-dark">Manage Videos</Button>
         </Link>

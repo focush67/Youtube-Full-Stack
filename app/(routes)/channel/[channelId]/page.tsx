@@ -1,5 +1,5 @@
-import ChannelHeader from "@/components/channel/ChannelHeader";
-import VideoCard from "@/components/shared/VideoCard";
+import ChannelHeader from "@/components/channel/header";
+import VideoCard from "@/components/shared/video-card";
 import getChannelById from "@/services/getChannelById";
 import getVideosByChannelId from "@/services/getVideosByChannelld";
 interface ChannelPageParams {

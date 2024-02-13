@@ -1,9 +1,9 @@
 "use client";
 import { MdMenu } from "react-icons/md";
-import IconButton from "../IconButton";
-import Logo from "../Logo";
+import IconButton from "../icon-button";
+import Logo from "../logo";
 import { useContext } from "react";
-import { SidebarContext } from "@/contexts/SidebarContext";
+import { SidebarContext } from "@/contexts/sidebar-context";
 const NavigationHeader = () => {
   const sidebar = useContext(SidebarContext);
   return (

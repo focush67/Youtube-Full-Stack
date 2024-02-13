@@ -1,6 +1,6 @@
 "use client";
 
-import { compact } from "@/utilities/Num";
+import { compact } from "@/utilities/num";
 import { Video } from "@prisma/client";
 import dayjs from "@/vendor/dayjs";
 import { useState } from "react";
@@ -9,7 +9,7 @@ interface DescriptionProps {
   video: Video;
 }
 const Description: React.FC<DescriptionProps> = ({ video }) => {
-  const [expanded, setexpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   return (
     <div
       className={`bg-neutral-800 rounded-xl p-3 overflow-hidden ${
@@ -28,7 +28,7 @@ const Description: React.FC<DescriptionProps> = ({ video }) => {
         </div>
       </div>
       <p
-        onClick={() => setexpanded((prev) => !prev)}
+        onClick={() => setExpanded((prev) => !prev)}
         className={`cursor-pointer ${expanded ? "mt-2" : ""}`}
       >
         {expanded ? "Show Less" : "Show More"}

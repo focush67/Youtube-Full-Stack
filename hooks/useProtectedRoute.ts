@@ -1,19 +1,21 @@
-import { CurrentChannelContext } from "@/contexts/CurrentChannelContext";
-import { CurrentUserContext } from "@/contexts/CurrentUserContext";
+import { getCurrentChannelState, getCurrentUserState } from "@/redux/store";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-interface UseProtectedRouteProps{
-    checkChannel?: boolean;
+interface UseProtectedRouteProps {
+  checkChannel?: boolean;
 }
-export const useProtectedRoute = ({checkChannel = true}:UseProtectedRouteProps = {}) => {
-    const currentUser = useContext(CurrentUserContext);
-    const currentChannel = useContext(CurrentChannelContext);
-    const router = useRouter();
+export const useProtectedRoute = ({
+  checkChannel = true,
+}: UseProtectedRouteProps = {}) => {
+  const currentUser = useSelector(getCurrentUserState);
+  const currentChannel = useSelector(getCurrentChannelState);
+  const router = useRouter();
 
-    useEffect(() => {
-        if(!currentUser || (checkChannel && !currentChannel)){
-            router.push("/");
-        }
-    },[checkChannel,router,currentChannel,currentUser])
-}
+  useEffect(() => {
+    if (!currentUser || (checkChannel && !currentChannel)) {
+      router.push("/");
+    }
+  }, [checkChannel, router, currentChannel, currentUser]);
+};

@@ -1,16 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import UserAvatar, { UserAvatarSize } from "../UserAvatar";
-import Button from "../Button";
+import UserAvatar, { UserAvatarSize } from "../user-avatar";
+import Button from "../button";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Input from "../Input";
-import MediaUpload from "../MediaUpload";
+import MediaUpload from "../media-upload";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { CreateChannelModalContext } from "@/contexts/CreateChannelContext";
+import { CreateChannelModalContext } from "@/contexts/create-channel-context";
 import { useContext } from "react";
+
 const CreateChannelModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const createChannelModal = useContext(CreateChannelModalContext);
@@ -42,7 +43,7 @@ const CreateChannelModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     axios
-      .post(`${process.env.NEXTAUTH_URL}/api/channels`, data)
+      .post(`/api/channels`, data)
       .then(() => {
         toast.success("Channel created successfully");
         createChannelModal?.onClose();
@@ -52,7 +53,10 @@ const CreateChannelModal = () => {
       .catch(() => {
         toast.error("Could not create channel");
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+        router.refresh();
+      });
   };
 
   return createChannelModal?.isOpen ? (

@@ -1,8 +1,8 @@
 "use client";
 
 import { Channel, Comment as CommentType } from "@prisma/client";
-import CommentInput from "./CommentInput";
-import Comment from "./Comment";
+import CommentInput from "./comment-input";
+import Comment from "./comment";
 
 interface CommentRegionProps {
   comments: (CommentType & { channel: Channel })[];

@@ -1,15 +1,17 @@
-import { CurrentUserContext } from "@/contexts/CurrentUserContext";
 import { useRouter } from "next/navigation";
-import { useCallback, useContext, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUserState } from "@/redux/store";
+import { addSubscriber, removeSubscriber } from "@/redux/slices/current-user";
 interface UseSubscribeProps {
   channelId: string;
 }
 
 export const useSubscribe = ({ channelId }: UseSubscribeProps) => {
-  const currentUser = useContext(CurrentUserContext);
-
+  const dispatch = useDispatch();
+  const currentUser = useSelector(getCurrentUserState);
   const router = useRouter();
 
   const hasSubscribed = useMemo(() => {
@@ -28,6 +30,7 @@ export const useSubscribe = ({ channelId }: UseSubscribeProps) => {
 
     try {
       if (hasSubscribed) {
+        console.log("Dispatching unsubb request");
         const unsubbedResponse = await axios.delete(
           `/api/users/subscriptions`,
           {
@@ -37,15 +40,28 @@ export const useSubscribe = ({ channelId }: UseSubscribeProps) => {
           }
         );
 
-        // console.log("Unsubbed Response: ", unsubbedResponse);
+        console.log("Unsubbed Response: ", unsubbedResponse.data);
+
+        dispatch(
+          removeSubscriber({
+            id: channelId,
+          })
+        );
 
         // Need to add NEXTAUTH_URL for deployment
       } else {
+        console.log("Dispatching sub request");
         const subbedResponse = await axios.post(`/api/users/subscriptions`, {
           channelId,
         });
 
-        // console.log("Subbed Response: ", subbedResponse);
+        console.log("Subbed Response: ", subbedResponse.data);
+
+        dispatch(
+          addSubscriber({
+            id: channelId,
+          })
+        );
 
         // Need to add NEXTAUTH_URL for deployment
       }

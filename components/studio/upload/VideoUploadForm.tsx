@@ -1,6 +1,6 @@
 "use client";
-import MediaUpload from "@/components/shared/MediaUpload";
-import TextArea from "@/components/shared/TextArea";
+import MediaUpload from "@/components/shared/media-upload";
+import TextArea from "@/components/shared/text-area";
 import Image from "next/image";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { FaRegSquarePlus } from "react-icons/fa6";

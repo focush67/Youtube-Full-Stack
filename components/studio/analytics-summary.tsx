@@ -1,12 +1,13 @@
 "use client";
 
 import { useProtectedRoute } from "@/hooks/useProtectedRoute";
-import { CurrentChannelContext } from "@/contexts/CurrentChannelContext";
 import { Video } from "@prisma/client";
-import { useContext, useMemo } from "react";
-import UserAvatar, { UserAvatarSize } from "../shared/UserAvatar";
-import AnalyticsSummaryItems from "./AnalyticsSummaryItems";
-import { compact } from "@/utilities/Num";
+import { useMemo } from "react";
+import UserAvatar, { UserAvatarSize } from "../shared/user-avatar";
+import AnalyticsSummaryItems from "./analytics-summary-items";
+import { compact } from "@/utilities/num";
+import { useSelector } from "react-redux";
+import { getCurrentChannelState } from "@/redux/store";
 
 interface AnalyticsSummaryProps {
   videos: Video[];
@@ -15,7 +16,7 @@ interface AnalyticsSummaryProps {
 const AnalyticsSummary: React.FC<AnalyticsSummaryProps> = ({ videos }) => {
   useProtectedRoute();
 
-  const currentChannel = useContext(CurrentChannelContext);
+  const currentChannel = useSelector(getCurrentChannelState);
 
   const viewsCount = useMemo(
     () => videos.reduce((totalViews, video) => totalViews + video.viewCount, 0),

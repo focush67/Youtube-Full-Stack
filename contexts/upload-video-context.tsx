@@ -12,7 +12,7 @@ export const UploadVideoModalContext = createContext<ModalState | null>(null);
 const UploadVideoModalProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <UploadVideoModalContext.Provider
       value={{

@@ -1,21 +1,21 @@
 "use client";
 
-import { CurrentUserContext } from "@/contexts/CurrentUserContext";
 import { Channel, Video } from "@prisma/client";
-import { useContext } from "react";
 import LikeDislikeButton from "./LikeDislikeButton";
 import Link from "next/link";
-import UserAvatar, { UserAvatarSize } from "@/components/shared/UserAvatar";
-import { compact } from "@/utilities/Num";
-import Button from "@/components/shared/Button";
-import SubscribeButton from "@/components/shared/SubscribeButton";
+import UserAvatar, { UserAvatarSize } from "@/components/shared/user-avatar";
+import { compact } from "@/utilities/num";
+import Button from "@/components/shared/button";
+import SubscribeButton from "@/components/shared/subscribe-button";
+import { useSelector } from "react-redux";
+import { getCurrentUserState } from "@/redux/store";
 
 interface LikeSubscribeProps {
   video: Video;
   channel: Channel;
 }
 const LikeSubscribe: React.FC<LikeSubscribeProps> = ({ video, channel }) => {
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = useSelector(getCurrentUserState);
 
   return (
     <div className="flex items-center justify-between">

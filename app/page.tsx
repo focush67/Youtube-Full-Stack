@@ -1,5 +1,5 @@
 import getTrendingVideos from "@/services/getTrendingVideos";
-import VideoCard from "@/components/shared/VideoCard";
+import VideoCard from "@/components/shared/video-card";
 
 export default async function Home() {
   const trendingVideos = await getTrendingVideos();

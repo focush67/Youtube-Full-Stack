@@ -1,5 +1,5 @@
-import AnalyticsSummary from "@/components/studio/AnalyticsSummary";
-import VideoDetailsCard from "@/components/studio/VideoDetailsCard";
+import AnalyticsSummary from "@/components/studio/analytics-summary";
+import VideoDetailsCard from "@/components/studio/video-details-card";
 import getCurrentChannnel from "@/services/getCurrentChannel";
 import getVideosByChannelId from "@/services/getVideosByChannelld";
 import React from "react";

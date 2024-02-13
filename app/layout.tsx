@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/shared/Navigation/Navigation";
-import CurrentUserProvider from "@/contexts/CurrentUserContext";
-import SidebarProvider from "@/contexts/SidebarContext";
-import getCurrentUser from "@/services/getCurrentUser";
-import CurrentChannelProvider from "@/contexts/CurrentChannelContext";
-import CreateChannelModalProvider from "@/contexts/CreateChannelContext";
-import CreateChannelModal from "@/components/shared/Modals/CreateChannelModal";
+import Navigation from "@/components/shared/Navigation/navigation";
+import SidebarProvider from "@/contexts/sidebar-context";
+import CreateChannelModalProvider from "@/contexts/create-channel-context";
+import CreateChannelModal from "@/components/shared/Modals/create-channel";
 import { Toaster } from "react-hot-toast";
-import getCurrentChannel from "@/services/getCurrentChannel";
-import UploadVideoModalProvider from "@/contexts/UploadVideoModalContext";
+import UploadVideoModalProvider from "@/contexts/upload-video-context";
+import ReduxProvider from "@/utilities/store-providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,8 +24,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const currentUser = await getCurrentUser();
-  const currentChannel = await getCurrentChannel();
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -38,17 +33,16 @@ export default async function RootLayout({
               position: "bottom-left",
             }}
           />
-          <CurrentUserProvider user={currentUser}>
+          <ReduxProvider>
             <CreateChannelModal />
-            <CurrentChannelProvider user={currentChannel}>
-              <UploadVideoModalProvider>
-                <SidebarProvider>
-                  <Navigation />
-                  <div className="pt-16">{children}</div>
-                </SidebarProvider>
-              </UploadVideoModalProvider>
-            </CurrentChannelProvider>
-          </CurrentUserProvider>
+
+            <UploadVideoModalProvider>
+              <SidebarProvider>
+                <Navigation />
+                <div className="pt-16">{children}</div>
+              </SidebarProvider>
+            </UploadVideoModalProvider>
+          </ReduxProvider>
         </CreateChannelModalProvider>
       </body>
     </html>

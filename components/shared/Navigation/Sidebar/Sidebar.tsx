@@ -1,14 +1,15 @@
 "use client";
 
-import { SidebarContext } from "@/contexts/SidebarContext";
+import { SidebarContext } from "@/contexts/sidebar-context";
 import { Channel } from "@prisma/client";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
-import UserAvatar, { UserAvatarSize } from "../../UserAvatar";
-import NavigationHeader from "../NavigationHeader";
-import MenuItems from "../Navbar/UserOptions/MenuItems";
+import UserAvatar, { UserAvatarSize } from "../../user-avatar";
+import NavigationHeader from "../navigation-header";
+import MenuItems from "../Navbar/user-options/menu-items";
 import { MdOutlineHome, MdOutlineSubscriptions } from "react-icons/md";
-import { CurrentUserContext } from "@/contexts/CurrentUserContext";
+import { useSelector } from "react-redux";
+import { getCurrentUserState } from "@/redux/store";
 
 interface SidebarProps {
   subscribedChannels: Channel[];
@@ -16,7 +17,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ subscribedChannels }) => {
   const sidebar = useContext(SidebarContext);
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = useSelector(getCurrentUserState);
   const router = useRouter();
 
   const handleItemClick = (onClick: () => void) => {
