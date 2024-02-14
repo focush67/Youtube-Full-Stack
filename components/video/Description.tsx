@@ -1,6 +1,6 @@
 "use client";
 
-import { compact } from "@/utilities/num";
+import { compact } from "@/utilities/Num";
 import { Video } from "@prisma/client";
 import dayjs from "@/vendor/dayjs";
 import { useState } from "react";

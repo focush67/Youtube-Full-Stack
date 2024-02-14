@@ -1,7 +1,7 @@
 "use client";
 
 import { useSubscribe } from "@/hooks/useSubscribe";
-import Button from "./button";
+import Button from "./Button";
 interface SubscribeButtonProps {
   channelId: string;
 }

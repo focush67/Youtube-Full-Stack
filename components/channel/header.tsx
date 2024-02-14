@@ -2,9 +2,9 @@
 
 import { Channel } from "@prisma/client";
 import UserAvatar, { UserAvatarSize } from "../shared/user-avatar";
-import { compact } from "@/utilities/num";
+import { compact } from "@/utilities/num"; // Imported dayjs
 import Link from "next/link";
-import Button from "../shared/button";
+import Button from "../shared/button"; // Imported button
 import SubscribeButton from "../shared/subscribe-button";
 import { useSelector } from "react-redux";
 import { getCurrentUserState } from "@/redux/store";

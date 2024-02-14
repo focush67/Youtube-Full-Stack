@@ -8,7 +8,7 @@ import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
 import dayjs from "@/vendor/dayjs";
-import { compact } from "@/utilities/num";
+import { compact } from "@/utilities/Num";
 import { MdDelete, MdEdit } from "react-icons/md";
 import EditModal from "../shared/Modals/edit-video";
 

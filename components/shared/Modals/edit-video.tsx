@@ -26,8 +26,6 @@ const EditModal = ({ onClose, video }: EditModalProps) => {
   };
 
   const handleSubmit = async () => {
-    // You can handle form submission here
-    // For simplicity, just log the values for now
     console.log("Title:", title);
     console.log("Description:", description);
     try {

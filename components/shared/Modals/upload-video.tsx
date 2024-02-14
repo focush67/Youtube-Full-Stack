@@ -6,7 +6,7 @@ import { MdClose, MdUpload } from "react-icons/md";
 import { useContext } from "react";
 import MediaUpload from "../media-upload";
 import IconButton from "../icon-button";
-import Button from "../button";
+import Button from "../Button";
 
 interface UploadVideoModalProps {
   onUpload: (value: string) => void;

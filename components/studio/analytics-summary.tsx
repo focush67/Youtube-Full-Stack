@@ -5,7 +5,7 @@ import { Video } from "@prisma/client";
 import { useMemo } from "react";
 import UserAvatar, { UserAvatarSize } from "../shared/user-avatar";
 import AnalyticsSummaryItems from "./analytics-summary-items";
-import { compact } from "@/utilities/num";
+import { compact } from "@/utilities/Num";
 import { useSelector } from "react-redux";
 import { getCurrentChannelState } from "@/redux/store";
 

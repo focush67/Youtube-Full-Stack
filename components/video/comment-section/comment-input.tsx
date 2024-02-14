@@ -1,5 +1,5 @@
 import { useComment } from "@/hooks/useComment";
-import Button from "@/components/shared/button";
+import Button from "@/components/shared/Button";
 import UserAvatar from "@/components/shared/user-avatar";
 import React from "react";
 import { useSelector } from "react-redux";
