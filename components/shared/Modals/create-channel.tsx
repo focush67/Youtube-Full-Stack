@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import UserAvatar, { UserAvatarSize } from "../user-avatar";
-import Button from "../button";
+import Button from "../Button";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Input from "../Input";
 import MediaUpload from "../media-upload";
